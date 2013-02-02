@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <CheckBox
+        android:id="@+id/useLocalData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/useLocalData" />
+
+    <TextView
+        android1:id="@+id/fuelType"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_below="@+id/useLocalData"
+        android1:layout_centerHorizontal="true"
+        android1:text="@string/fuelType"
+        android1:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RadioGroup
+        android1:id="@+id/radioFuelTypeGroup"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_below="@+id/fuelType"
+        android1:layout_centerHorizontal="true"
+        android1:checkedButton="@+id/fuelAll" >
+
+        <RadioButton
+            android1:id="@+id/fuel95"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:checked="false"
+            android1:enabled="false"
+            android1:text="@string/bens95"
+            android1:textSize="20sp"
+            android1:textStyle="bold" />
+
+        <RadioButton
+            android1:id="@+id/fuel98"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:enabled="false"
+            android1:text="@string/bens98"
+            android1:textSize="20sp"
+            android1:textStyle="bold" />
+
+        <RadioButton
+            android1:id="@+id/fuelD"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:enabled="false"
+            android1:text="@string/diisel"
+            android1:textSize="20sp"
+            android1:textStyle="bold" />
+
+        <RadioButton
+            android1:id="@+id/fuelAll"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:text="@string/fuelAll"
+            android1:textSize="20sp"
+            android1:textStyle="bold" />
+
+    </RadioGroup>
+
+    <Button
+        android1:id="@+id/saveSettings"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_alignParentBottom="true"
+        android1:layout_centerHorizontal="true"
+        android1:text="@string/save" />
+
+</RelativeLayout>

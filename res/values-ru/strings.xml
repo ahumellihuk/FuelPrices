@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">Цены на Топливо | Эстония</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="currentprices">Стандартные цены на топливо</string>
+    <string name="bens95">95</string>
+    <string name="bens98">98</string>
+    <string name="diisel">D</string>
+    <string name="reset">Сброс</string>
+    <string name="calculate">Посчитать</string>
+    <string name="hint">Литров нужно</string>
+    <string name="useLocalData">Загружать новые данные только раз в день</string>
+    <string name="fuelType">Предпочитаемый тип топлива:</string>
+    <string name="fuelAll">Все типы</string>
+    <string name="save">Сохранить</string>
+    <string name="prices">Цены</string>
+    <string name="map">Карта</string>
+    <string name="preferences">Настройки</string>
+
+</resources>

@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">Kütuse hinnad | Eesti</string>
+    <string name="menu_settings">Seadmed</string>
+    <string name="currentprices">Kütuse Tavahinnad</string>
+    <string name="bens95">95</string>
+    <string name="bens98">98</string>
+    <string name="diisel">D</string>
+    <string name="reset">Lähtesta</string>
+    <string name="calculate">Arvuta</string>
+    <string name="hint">Liitrid on vaja</string>
+    <string name="useLocalData">Uute andmete laadimine ainult üks kord päevas</string>
+    <string name="fuelType">Eelistatav küütuse tüüp:</string>
+    <string name="fuelAll">Koik tüüpid</string>
+    <string name="save">Säästa</string>
+    <string name="prices">Hinnad</string>
+    <string name="map">Kaart</string>
+    <string name="preferences">Seaded</string>
+
+</resources>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/service1"
+            android:text="Tankla address"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+        <ImageView
+            android:id="@+id/service6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/signD" />
+
+        <ImageView
+            android:id="@+id/service5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/service6"
+            android:layout_alignTop="@+id/service6" />
+        
+        <ImageView
+            android:id="@+id/service4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/service5"
+            android:layout_toLeftOf="@+id/service5" />
+        
+        <ImageView
+            android:id="@+id/service3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/service4"
+            android:layout_toLeftOf="@+id/service4" />
+        
+        <ImageView
+            android:id="@+id/service2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/service3"
+            android:layout_toLeftOf="@+id/service3" />
+        
+        <ImageView
+            android:id="@+id/service1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/service2"
+            android:layout_toLeftOf="@+id/service2" />
+
+        <TextView
+            android:id="@+id/signD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/diisel"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sign98"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/signD"
+            android:text="@string/bens98"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#006600"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sign95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/sign98"
+            android:text="@string/bens95"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#33CC33"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>

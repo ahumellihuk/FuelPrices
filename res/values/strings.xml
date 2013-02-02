@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">Fuel Prices | Estonia</string>
+    <string name="menu_settings">Settings</string>
+    <string name="currentprices">Regular Fuel Prices</string>
+    <string name="bens95">95</string>
+    <string name="bens98">98</string>
+    <string name="diisel">D</string>
+    <string name="reset">Reset</string>
+    <string name="calculate">Calculate</string>
+    <string name="hint">Amount of liters required</string>
+    <string name="useLocalData">Fetch new data only once a day</string>
+    <string name="fuelType">Preferable Fuel Type:</string>
+    <string name="fuelAll">All types</string>
+    <string name="save">Save</string>
+    <string name="prices">Prices</string>
+    <string name="map">Map</string>
+    <string name="preferences">Preferences</string>
+
+</resources>

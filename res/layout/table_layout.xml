@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" 
+    android:descendantFocusability="beforeDescendants"
+	android:focusableInTouchMode="true">
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TableLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:shrinkColumns="*"
+            android:stretchColumns="*" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_span="4"
+                    android:gravity="center"
+                    android:text="@string/currentprices"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_horizontal" >
+
+                <TextView
+                    android:id="@+id/blankTextView"
+                    android:layout_width="match_parent"
+                    android:text="" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/bens95"
+                    android:layout_gravity="center_vertical|center_horizontal|center"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:text="@string/bens95"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/bens98"
+                    android:layout_gravity="center_vertical|center_horizontal|center"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:text="@string/bens98"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/diisel"
+                    android:layout_gravity="center_vertical|center_horizontal|center"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:text="@string/diisel" 
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" >
+                </TextView>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/alexela" />
+
+                <TextView
+                    android:id="@+id/bens95_1"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/bens98_1"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/diisel_1"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/eurooil" />
+
+                <TextView
+                    android:id="@+id/bens95_2"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/bens98_2"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/diisel_2"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/favora" />
+
+                <TextView
+                    android:id="@+id/bens95_3"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/bens98_3"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/diisel_3"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/neste" />
+
+                <TextView
+                    android:id="@+id/bens95_4"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/bens98_4"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/diisel_4"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/olerex" />
+
+                <TextView
+                    android:id="@+id/bens95_5"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/bens98_5"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/diisel_5"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/statoil" />
+
+                <TextView
+                    android:id="@+id/bens95_6"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/bens98_6"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/diisel_6"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/statoil123" />
+
+                <TextView
+                    android:id="@+id/bens95_7"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/bens98_7"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/diisel_7"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/fiveplus" />
+
+                <TextView
+                    android:id="@+id/bens95_8"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/bens98_8"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/diisel_8"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/liters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/scrollView1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/calculate"
+        android:layout_toLeftOf="@+id/calculate"
+        android:ems="10"
+        android:hint="@string/hint"
+        android:inputType="number" >
+
+    </EditText>
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="reset"
+        android:text="@string/reset" />
+
+    <Button
+        android:id="@+id/calculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/reset"
+        android:onClick="calculatePrices"
+        android:text="@string/calculate" />
+
+</RelativeLayout>
