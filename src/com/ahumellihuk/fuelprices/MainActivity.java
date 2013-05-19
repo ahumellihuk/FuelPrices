@@ -4,10 +4,8 @@ import java.text.DecimalFormat;
 import java.util.Date;
 
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -23,7 +21,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -35,7 +32,7 @@ public class MainActivity extends Activity {
 	
 	private static final LatLng TALLINN = new LatLng(59.43,24.75);
 	protected static final String MAP_LOADED = "com.ahumellihuk.fuelprices.MAP_LOADED";
-	String pricesTab, mapTab, preferencesTab;
+	String pricesTab, mapTab, preferencesTab, stationsTab;
 	SharedPreferences sharedPref;
 	ProgressDialog progress;
 	TextView [] table;
@@ -72,6 +69,7 @@ public class MainActivity extends Activity {
         pricesTab = getString(R.string.prices);
         mapTab = getString(R.string.map);
         preferencesTab = getString(R.string.preferences);
+        stationsTab = getString(R.string.stations);
         
         ActionBar.TabListener tabListener = new ActionBar.TabListener() {
             public void onTabSelected(ActionBar.Tab tab,
@@ -88,7 +86,7 @@ public class MainActivity extends Activity {
             	else if (name.equals(preferencesTab)) {
             		ft.replace(R.id.fragment1, settingsFragment);
             	}
-            	else if (name.equals("Tanklad")) {
+            	else if (name.equals(stationsTab)) {
             		ft.replace(R.id.fragment1, tanklaList);
             	}
             	
@@ -106,7 +104,7 @@ public class MainActivity extends Activity {
             	else if (name.equals(preferencesTab)) {
             		ft.remove(settingsFragment);
             	}
-            	else if (name.equals("Tanklad")) {
+            	else if (name.equals(stationsTab)) {
             		ft.remove(tanklaList);
             	}
             }
@@ -118,7 +116,7 @@ public class MainActivity extends Activity {
         };
         actionBar.addTab(actionBar.newTab().setText(pricesTab).setTabListener(tabListener), true);
         actionBar.addTab(actionBar.newTab().setText(mapTab).setTabListener(tabListener));
-        actionBar.addTab(actionBar.newTab().setText("Tanklad").setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText(stationsTab).setTabListener(tabListener));
         actionBar.addTab(actionBar.newTab().setText(preferencesTab).setTabListener(tabListener));
         
         IntentFilter filter = new IntentFilter();
@@ -132,7 +130,7 @@ public class MainActivity extends Activity {
 					GoogleMap map = mapFragment.getMap();
             		map.setMyLocationEnabled(true);
             		map.moveCamera(CameraUpdateFactory.newLatLngZoom(TALLINN, 11));
-            		for (int i=0; i<8; i++)
+            		for (int i=0; i<7; i++)
             			map.addMarker(markers[i]);
 				}
 				else if (intent.getAction().equals(FetchData.TASK_FINISHED)){
@@ -140,7 +138,7 @@ public class MainActivity extends Activity {
 					Date date = new Date();
 					SharedPreferences.Editor editor = sharedPref.edit();
 		        	boolean match = true;
-					for (int i=0; i<24; i++) {
+					for (int i=0; i<21; i++) {
 						String text = sharedPref.getString("price"+0, null);
 						int color = sharedPref.getInt("color"+i, -16777216);
 						if (!((String)table[i].getText()).equals(text))
@@ -150,7 +148,7 @@ public class MainActivity extends Activity {
 					}		        	
 		        	if (!match) {		        	
 			        	
-			        	for (int i=0; i<24; i++) {
+			        	for (int i=0; i<21; i++) {
 			            	editor.putString("price"+i, (String) table[i].getText());
 			            	editor.putInt("color"+i, table[i].getCurrentTextColor());            	           	
 			            }        	
@@ -171,15 +169,15 @@ public class MainActivity extends Activity {
         
         
         
-       markers = new MarkerOptions[8];
+       markers = new MarkerOptions[7];
        markers[0] = new MarkerOptions().position(new LatLng(59.412179, 24.661662)).title("Alexela").snippet("Ehitajate tee 101");
        markers[1] = new MarkerOptions().position(new LatLng(59.419360, 24.638202)).title("Euro Oil").snippet("Paldiski mnt. 108");
        markers[2] = new MarkerOptions().position(new LatLng(59.414803,24.738686)).title("Favora").snippet("Tondi 6");
        markers[3] = new MarkerOptions().position(new LatLng(59.434629,24.832231)).title("Neste").snippet("Punane 43");
        markers[4] = new MarkerOptions().position(new LatLng(59.409998,24.675529)).title("Olerex").snippet("Laki 29");
        markers[5] = new MarkerOptions().position(new LatLng(59.405657,24.699949)).title("Statoil").snippet("Sopruse pst 200b");
-       markers[6] = new MarkerOptions().position(new LatLng(59.42768,24.628742)).title("Statoil 1-2-3").snippet("Vana-Rannamoisa tee 1");
-       markers[7] = new MarkerOptions().position(new LatLng(59.412827,24.708812)).title("5+").snippet("Linnu tee 64");
+       //markers[6] = new MarkerOptions().position(new LatLng(59.42768,24.628742)).title("Statoil 1-2-3").snippet("Vana-Rannamoisa tee 1");
+       markers[6] = new MarkerOptions().position(new LatLng(59.412827,24.708812)).title("5+").snippet("Linnu tee 64");
 		       
     }
    
@@ -201,21 +199,26 @@ public class MainActivity extends Activity {
     }
     
     public void calculatePrices(View view) {
-   	
-    	for (int i=0; i<24; i++) {
+    	try {
     		EditText editText = (EditText)findViewById(R.id.liters);
     		int liters = Integer.parseInt(editText.getText().toString());
-    		String value = sharedPref.getString("price"+i, null);  
-    		double dValue = Double.parseDouble(value);
-    		double newDValue = dValue * liters;
-    		DecimalFormat df = new DecimalFormat("#.###");
-    		String newValue = ""+df.format(newDValue)+"ˆ";
-    		table[i].setText(newValue);
-    	}
+    	
+		
+	    	for (int i=0; i<21; i++) {    		
+	    		String value = sharedPref.getString("price"+i, null);  
+	    		try {
+	    			double dValue = Double.parseDouble(value);
+	    			double newDValue = dValue * liters;
+		    		DecimalFormat df = new DecimalFormat("#.###");
+		    		String newValue = ""+df.format(newDValue)+"ˆ";
+		    		table[i].setText(newValue);
+	    		} catch (NumberFormatException e) {}	    		
+	    	}
+    	} catch (NumberFormatException e) {}
     }
     
     public void reset(View view) {
-    	for (int i=0; i<24; i++) {
+    	for (int i=0; i<21; i++) {
         	String value = sharedPref.getString("price"+i, null);    
         	if (value != null)
         		table[i].setText(value);

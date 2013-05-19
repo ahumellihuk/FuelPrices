@@ -16,5 +16,6 @@
     <string name="prices">Цены</string>
     <string name="map">Карта</string>
     <string name="preferences">Настройки</string>
+    <string name="stations">Заправки</string>
 
 </resources>

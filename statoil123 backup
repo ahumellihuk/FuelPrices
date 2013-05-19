@@ -1,0 +1,33 @@
+<TableRow
+                android:id="@+id/tableRow9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/statoil123" />
+
+                <TextView
+                    android:id="@+id/bens95_7"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/bens98_7"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+
+                <TextView
+                    android:id="@+id/diisel_7"
+                    android:gravity="center|center_horizontal|center_vertical|clip_horizontal"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:typeface="serif" />
+            </TableRow>

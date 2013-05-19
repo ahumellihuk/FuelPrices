@@ -16,5 +16,6 @@
     <string name="prices">Hinnad</string>
     <string name="map">Kaart</string>
     <string name="preferences">Seaded</string>
+    <string name="stations">Tanklad</string>
 
 </resources>
