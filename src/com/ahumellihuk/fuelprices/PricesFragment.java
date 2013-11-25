@@ -1,23 +1,42 @@
 package com.ahumellihuk.fuelprices;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TableLayout;
 import android.widget.TextView;
+
+import com.ahumellihuk.fuelprices.tools.FetchData;
 
 public class PricesFragment extends Fragment {
 	
-	TextView [] table;
-	MainActivity main;
-	
-	
-	@Override
+	TableLayout table;
+    SharedPreferences sharedPref;
+    ProgressDialog progress;
+    private Activity activity;
+    private List<FuelPricesRow> rows = new ArrayList<FuelPricesRow>();
+    private Double[][] prices;
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -27,112 +46,212 @@ public class PricesFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		main = (MainActivity) getActivity();
-		TextView[] views = table;
-		initTable();
-		if (main.sharedPref.getBoolean("useLocalData", false)) {
+        activity = getActivity();
+        table = (TableLayout)getView().findViewById(R.id.pricesTable);
+        sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(FetchData.TASK_FINISHED);
+        activity.registerReceiver(new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                progress.dismiss();
+                prices = FetchData.decode(intent.getStringExtra("result"));
+                buildTable(prices, true);
+            }
+        }, filter);
+
+        getView().findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                resetTable();
+            }
+        });
+
+        getView().findViewById(R.id.calculate).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                calculatePrices();
+            }
+        });
+
+		if (sharedPref.getBoolean("useLocalData", false)) {
 			Date date = new Date();
 			boolean needToUpdate = false;
-			if (main.sharedPref.getInt("updateYear", 0) < date.getYear())
+			if (sharedPref.getInt("updateYear", 0) < date.getYear())
 				needToUpdate = true;
-			else if (main.sharedPref.getInt("updateMonth", 0) < date.getMonth())
+			else if (sharedPref.getInt("updateMonth", 0) < date.getMonth())
 				needToUpdate = true;
-			else if (main.sharedPref.getInt("updateDay", 0) < date.getDate())
+			else if (sharedPref.getInt("updateDay", 0) < date.getDate())
 				needToUpdate = true;
 			
 			if (needToUpdate) {
-				main.table = this.table;
-				main.pricesFragment();
-			}
-			else {
-				boolean present = true;
-				for (int i=0; i<21; i++) {
-					if (main.sharedPref.getString("price"+0, null) == null)
-							present = false;
-					if (main.sharedPref.getInt("color"+i, 0) == 0)
-							present = false;
-				}	
-				if (present) {
-					for (int i=0; i<21; i++) {
-						table[i].setText(main.sharedPref.getString("price"+i, null));
-						table[i].setTextColor(main.sharedPref.getInt("color"+i, -16777216));
-					}
-					main.table = this.table;
-				}
-				else if (views != null) {
-					for (int i=0; i<21; i++) {
-						String text = (String) views[i].getText();
-						int color = views[i].getCurrentTextColor();
-						table[i].setText(text);
-						table[i].setTextColor(color);
-					}
-				}
-				else if (savedInstanceState != null) {
-					for (int i=0; i<21; i++) {
-						String text = savedInstanceState.getString("text"+i);
-						int color = savedInstanceState.getInt("color"+i);
-						table[i].setText(text);
-						table[i].setTextColor(color);
-					}
-				}
-				else {
-					main.table = this.table;
-					main.pricesFragment();
+				fetchData();
+			} else {
+				if (sharedPref.contains("prices")) {
+                    prices = FetchData.decode(sharedPref.getString("prices", null));
+					buildTable(prices, false);
+				} else if (savedInstanceState != null && savedInstanceState.containsKey("prices")) {
+				    prices = FetchData.decode(savedInstanceState.getString("prices"));
+                    buildTable(prices, false);
+				} else {
+					fetchData();
 				}
 			}
-		}		
-		else {
-			main.table = this.table;
-			main.pricesFragment();
+		} else {
+			fetchData();
 		}
-			
-		
-		
-		
 	}
-	
-	public void initTable() {
-    	table = new TextView[21];
-    	
-    	table[0] = (TextView)getView().findViewById(R.id.bens95_1);
-    	table[1] = (TextView)getView().findViewById(R.id.bens95_2);
-    	table[2] = (TextView)getView().findViewById(R.id.bens95_3);
-    	table[3] = (TextView)getView().findViewById(R.id.bens95_4);
-    	table[4] = (TextView)getView().findViewById(R.id.bens95_5);
-    	table[5] = (TextView)getView().findViewById(R.id.bens95_6);
-    	table[6] = (TextView)getView().findViewById(R.id.bens95_7);
-    	//table[7] = (TextView)getView().findViewById(R.id.bens95_8);
-    	
-    	table[7] = (TextView)getView().findViewById(R.id.bens98_1);
-    	table[8] = (TextView)getView().findViewById(R.id.bens98_2);
-    	table[9] = (TextView)getView().findViewById(R.id.bens98_3);
-    	table[10] = (TextView)getView().findViewById(R.id.bens98_4);
-    	table[11] = (TextView)getView().findViewById(R.id.bens98_5);
-    	table[12] = (TextView)getView().findViewById(R.id.bens98_6);
-    	table[13] = (TextView)getView().findViewById(R.id.bens98_7);
-    	//table[15] = (TextView)getView().findViewById(R.id.bens98_8);
-    	
-    	table[14] = (TextView)getView().findViewById(R.id.diisel_1);
-    	table[15] = (TextView)getView().findViewById(R.id.diisel_2);
-    	table[16] = (TextView)getView().findViewById(R.id.diisel_3);
-    	table[17] = (TextView)getView().findViewById(R.id.diisel_4);
-    	table[18] = (TextView)getView().findViewById(R.id.diisel_5);
-    	table[19] = (TextView)getView().findViewById(R.id.diisel_6);
-    	table[20] = (TextView)getView().findViewById(R.id.diisel_7);
-    	//table[23] = (TextView)getView().findViewById(R.id.diisel_8);
+
+    private void buildTable(Double[][] prices, boolean updateData) {
+        for (FuelPricesRow row : rows) {
+            table.removeView(row);
+        }
+        rows.clear();
+
+        //Lowest price finding
+        Double petrol95LowestPrice = 0.0, petrol98LowestPrice = 0.0, dieselLowestPrice = 0.0;
+        for (Double price : prices[0]) {
+            if (price != null) {
+                petrol95LowestPrice = price;
+                break;
+            }
+        }
+        for (Double price : prices[1]) {
+            if (price != null) {
+                petrol98LowestPrice = price;
+                break;
+            }
+        }
+        for (Double price : prices[2]) {
+            if (price != null) {
+                dieselLowestPrice = price;
+                break;
+            }
+        }
+        for (Double price : prices[0]) {
+            if (price != null) {
+                petrol95LowestPrice = Math.min(petrol95LowestPrice, price);
+            }
+        }
+        for (Double price : prices[1]) {
+            if (price != null) {
+                petrol98LowestPrice = Math.min(petrol98LowestPrice, price);
+            }
+        }
+        for (Double price : prices[2]) {
+            if (price != null) {
+                dieselLowestPrice = Math.min(dieselLowestPrice, price);
+            }
+        }
+
+
+        for (int i = 0; i<prices[0].length; i++) {
+            Double petrol95 = prices[0][i];
+            Double petrol98 = prices[1][i];
+            Double diesel = prices[2][i];
+            FuelPricesRow row = new FuelPricesRow(activity);
+            row.setPetrol95Price(petrol95);
+            row.setPetrol98Price(petrol98);
+            row.setDieselPrice(diesel);
+            //Set logo
+            switch (i) {
+                case 0:
+                    row.setLogo(R.drawable.krooning);
+                    break;
+                case 1:
+                    row.setLogo(R.drawable.eurooil);
+                    break;
+                case 2:
+                    row.setLogo(R.drawable.alexela);
+                    break;
+                case 3:
+                    row.setLogo(R.drawable.neste);
+                    break;
+                case 4:
+                    row.setLogo(R.drawable.olerex);
+                    break;
+                case 5:
+                    row.setLogo(R.drawable.statoil);
+                    break;
+                case 6:
+                    row.setLogo(R.drawable.fiveplus);
+                    break;
+            }
+            //Set lowest price color
+            if (petrol95 != null && petrol95.equals(petrol95LowestPrice)) {
+                row.setPetrol95LowestPrice();
+            }
+            if (petrol98 != null && petrol98.equals(petrol98LowestPrice)) {
+                row.setPetrol98LowestPrice();
+            }
+            if (diesel != null && diesel.equals(dieselLowestPrice)) {
+                row.setDieselLowestPrice();
+            }
+            table.addView(row);
+            rows.add(row);
+        }
+        if (updateData) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            Date date = new Date();
+            editor.putInt("updateDay", date.getDate());
+            editor.putInt("updateMonth", date.getMonth());
+            editor.putInt("updateYear", date.getYear());
+            editor.putString("prices", FetchData.encode(prices));
+            editor.commit();
+        }
     }
-	
-	@Override
+
+    @Override
 	public void onSaveInstanceState(Bundle outState) {
+        if (prices != null) {
+            outState.putString("prices", FetchData.encode(prices));
+        }
 		super.onSaveInstanceState(outState);
-		for (int i=0; i<21; i++) {
-			String text = (String) table[i].getText();
-			int color = table[i].getCurrentTextColor();
-			
-			outState.putString("text"+i, text);
-			outState.putInt("color"+i, color);
-		}
-		
 	}
+    protected boolean checkNetworkState() {
+        ConnectivityManager connMgr = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected())
+            return true;
+        else
+            return false;
+    }
+
+    protected void fetchData() {
+        if (checkNetworkState()) {
+            FetchData task = new FetchData();
+            task.execute(this);
+            progress = new ProgressDialog(activity, ProgressDialog.STYLE_SPINNER);
+            progress.setIndeterminate(true);
+            progress.show();
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("No Internet Access!");
+            alertDialog.show();
+        }
+    }
+
+    protected void calculatePrices() {
+        EditText editText = (EditText) getView().findViewById(R.id.liters);
+        try {
+            int liters = Integer.parseInt(editText.getText().toString());
+
+            for (FuelPricesRow row : rows) {
+                row.calculatePriceForLiters(liters);
+            }
+        } catch (NumberFormatException e) {
+            editText.setText("");
+        }
+    }
+
+    protected void resetTable() {
+        for (FuelPricesRow row : rows) {
+            row.resetPrices();
+        }
+    }
  
 }

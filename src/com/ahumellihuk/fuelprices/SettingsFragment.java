@@ -1,6 +1,7 @@
 package com.ahumellihuk.fuelprices;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +19,6 @@ public class SettingsFragment extends Fragment {
 	CheckBox useLocalData;
 	RadioGroup radioFuelTypeGroup;
 	Button saveSettings;
-	MainActivity main;
 	SharedPreferences sharedPref;
 	
 	@Override
@@ -36,9 +36,8 @@ public class SettingsFragment extends Fragment {
 		useLocalData = (CheckBox) getView().findViewById(R.id.useLocalData);
 		radioFuelTypeGroup = (RadioGroup) getView().findViewById(R.id.radioFuelTypeGroup);
 		saveSettings = (Button) getView().findViewById(R.id.saveSettings);
-		
-		main = (MainActivity) getActivity();
-		this.sharedPref = main.sharedPref;
+
+        sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
 		
 		if (sharedPref.contains("fuelTypeId")) {
 			int id = sharedPref.getInt("fuelTypeId", 0);
@@ -66,7 +65,7 @@ public class SettingsFragment extends Fragment {
 				
 				editor.commit(); 
 				
-				Toast toast = Toast.makeText(main.getApplicationContext(), "Preferences Saved", Toast.LENGTH_SHORT);
+				Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Preferences Saved", Toast.LENGTH_SHORT);
 				toast.show();
 			}
 			
