@@ -53,17 +53,6 @@ public class PricesFragment extends Fragment {
         activity = getActivity();
         table = (TableLayout)getView().findViewById(R.id.pricesTable);
         sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(FetchData.TASK_FINISHED);
-        activity.registerReceiver(new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                progress.dismiss();
-                prices = FetchData.decode(intent.getStringExtra("result"));
-                buildTable(prices, true);
-            }
-        }, filter);
 
         getView().findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
 
@@ -248,6 +237,18 @@ public class PricesFragment extends Fragment {
 
     protected void fetchData() {
         if (checkNetworkState()) {
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(FetchData.TASK_FINISHED);
+            activity.registerReceiver(new BroadcastReceiver() {
+
+                @Override
+                public void onReceive(Context arg0, Intent intent) {
+                    progress.dismiss();
+                    prices = FetchData.decode(intent.getStringExtra("result"));
+                    buildTable(prices, true);
+                    activity.unregisterReceiver(this);
+                }
+            }, filter);
             FetchData task = new FetchData();
             task.execute(this);
             progress = new ProgressDialog(activity, ProgressDialog.STYLE_SPINNER);
