@@ -165,9 +165,12 @@ pip-log.txt
 #Idea and Gradle
 .gradle
 .idea
+*.iml
+*.apk
+*.keystore
+*.gradle
 gradle
-FuelPrices.iml
-build.gradle
 gradlew
-gradlew.bar
+gradlew.bat
 lint.xml
+proguard-project.txt
