@@ -42,7 +42,9 @@ public class SettingsFragment extends Fragment {
 		if (sharedPref.contains("fuelTypeId")) {
 			int id = sharedPref.getInt("fuelTypeId", 0);
 			radioFuelTypeGroup.check(id);
-		}
+		} else {
+            radioFuelTypeGroup.check(R.id.fuelAll);
+        }
 		if (sharedPref.getBoolean("useLocalData", false)) {
 			useLocalData.setChecked(true);
 		}

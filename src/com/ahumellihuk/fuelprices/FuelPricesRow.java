@@ -13,12 +13,15 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TableRow.LayoutParams;
 
+import java.text.DecimalFormat;
+
 public class FuelPricesRow extends TableRow {
 
     TextView petrol95, petrol98, diesel;
     ImageView logo;
     Context context;
     Double petrol95Price, petrol98Price, dieselPrice;
+    DecimalFormat df = new DecimalFormat("0.###");
 
     public FuelPricesRow(Context context) {
         super(context);
@@ -98,7 +101,13 @@ public class FuelPricesRow extends TableRow {
 
     protected FuelPricesRow setPetrol95Price(Double price, boolean updatePrice) {
         if (price != null) {
-            petrol95.setText(price.toString());
+            String out = df.format(price);
+            if (out.length() > 5) {
+                petrol95.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+            } else {
+                petrol95.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            }
+            petrol95.setText(out);
         } else {
             petrol95.setText("-");
         }
@@ -110,7 +119,13 @@ public class FuelPricesRow extends TableRow {
 
     protected FuelPricesRow setPetrol98Price(Double price, boolean updatePrice) {
         if (price != null) {
-            petrol98.setText(price.toString());
+            String out = df.format(price);
+            if (out.length() > 5) {
+                petrol98.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+            } else {
+                petrol98.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            }
+            petrol98.setText(out);
         } else {
             petrol98.setText("-");
         }
@@ -122,7 +137,13 @@ public class FuelPricesRow extends TableRow {
 
     protected FuelPricesRow setDieselPrice(Double price, boolean updatePrice) {
         if (price != null) {
-            diesel.setText(price.toString());
+            String out = df.format(price);
+            if (out.length() > 5) {
+                diesel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+            } else {
+                diesel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            }
+            diesel.setText(out);
         } else {
             diesel.setText("-");
         }

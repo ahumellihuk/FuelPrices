@@ -17,5 +17,8 @@
     <string name="map">Map</string>
     <string name="preferences">Preferences</string>
     <string name="stations">Stations</string>
-
+    <string name="liters">l.</string>
+    <string name="liter">1 l.</string>
+    <string name="fetchingData">Fetching fuel prices...</string>
+    <string name="pleaseWait">Please wait</string>
 </resources>

@@ -80,20 +80,6 @@
         </TableLayout>
     </ScrollView>
 
-    <EditText
-        android:id="@+id/liters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/scrollView1"
-        android:layout_alignParentBottom="true"
-        android:layout_alignTop="@+id/calculate"
-        android:layout_toLeftOf="@+id/calculate"
-        android:ems="10"
-        android:hint="@string/hint"
-        android:inputType="number" >
-
-    </EditText>
-
     <Button
         android:id="@+id/reset"
         android:layout_width="wrap_content"
@@ -109,5 +95,31 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/reset"
         android:text="@string/calculate" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/litersInput"
+        android:minHeight="100dp"
+        android:maxHeight="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/calculate"
+        android:layout_alignTop="@+id/calculate"
+        android:max="149"
+        android:mirrorForRtl="true"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/liter"
+        android:id="@+id/litersAmount"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/calculate"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

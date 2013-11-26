@@ -17,5 +17,8 @@
     <string name="map">Карта</string>
     <string name="preferences">Настройки</string>
     <string name="stations">Заправки</string>
-
+    <string name="liters">л.</string>
+    <string name="liter">1 л.</string>
+    <string name="fetchingData">Загружаю цены на топливо...</string>
+    <string name="pleaseWait">Пожалуйста подождите</string>
 </resources>

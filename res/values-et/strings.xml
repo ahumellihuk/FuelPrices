@@ -10,12 +10,15 @@
     <string name="calculate">Arvuta</string>
     <string name="hint">Liitrid on vaja</string>
     <string name="useLocalData">Uute andmete laadimine ainult üks kord päevas</string>
-    <string name="fuelType">Eelistatav küütuse tüüp:</string>
+    <string name="fuelType">Eelistatav kütuse tüüp:</string>
     <string name="fuelAll">Koik tüüpid</string>
     <string name="save">Säästa</string>
     <string name="prices">Hinnad</string>
     <string name="map">Kaart</string>
     <string name="preferences">Seaded</string>
     <string name="stations">Tanklad</string>
-
+    <string name="liters">l.</string>
+    <string name="liter">1 l.</string>
+    <string name="fetchingData">Laadin kütusehindu...</string>
+    <string name="pleaseWait">Palun oodake</string>
 </resources>

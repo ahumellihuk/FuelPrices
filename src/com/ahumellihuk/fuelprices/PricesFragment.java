@@ -1,6 +1,5 @@
 package com.ahumellihuk.fuelprices;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,9 @@ public class PricesFragment extends Fragment {
     private Activity activity;
     private List<FuelPricesRow> rows = new ArrayList<FuelPricesRow>();
     private Double[][] prices;
+    TextView litersAmount;
+    SeekBar litersInput;
+    private Integer currentLitersAmount;
 
 
     @Override
@@ -74,6 +78,28 @@ public class PricesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 calculatePrices();
+            }
+        });
+
+        litersAmount = (TextView) getView().findViewById(R.id.litersAmount);
+
+        litersInput = ((SeekBar) getView().findViewById(R.id.litersInput));
+        litersInput.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                currentLitersAmount = progress + 1;
+                litersAmount.setText(currentLitersAmount + " " + getString(R.string.liters));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 
@@ -226,6 +252,8 @@ public class PricesFragment extends Fragment {
             task.execute(this);
             progress = new ProgressDialog(activity, ProgressDialog.STYLE_SPINNER);
             progress.setIndeterminate(true);
+            progress.setTitle(getString(R.string.pleaseWait));
+            progress.setMessage(getString(R.string.fetchingData));
             progress.show();
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
@@ -236,15 +264,8 @@ public class PricesFragment extends Fragment {
     }
 
     protected void calculatePrices() {
-        EditText editText = (EditText) getView().findViewById(R.id.liters);
-        try {
-            int liters = Integer.parseInt(editText.getText().toString());
-
-            for (FuelPricesRow row : rows) {
-                row.calculatePriceForLiters(liters);
-            }
-        } catch (NumberFormatException e) {
-            editText.setText("");
+        for (FuelPricesRow row : rows) {
+            row.calculatePriceForLiters(currentLitersAmount);
         }
     }
 
@@ -252,6 +273,7 @@ public class PricesFragment extends Fragment {
         for (FuelPricesRow row : rows) {
             row.resetPrices();
         }
+        litersInput.setProgress(0);
     }
  
 }
