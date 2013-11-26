@@ -5,15 +5,15 @@ import com.google.android.gms.maps.model.LatLng;
 public class GasStation {
 
     public enum Vendor {
-        STATOIL("Statoil", R.drawable.statoil, R.drawable.map_statoil, R.drawable.map_reference_statoil),
-        STATOIL123("Statoil 1-2-3", R.drawable.statoil123, R.drawable.map_statoil, R.drawable.map_reference_statoil),
-        ALEXELA("Alexela", R.drawable.alexela, R.drawable.map_alexela, R.drawable.map_reference_alexela),
-        NESTE("Neste", R.drawable.neste, R.drawable.map_neste, R.drawable.map_reference_neste),
-        KROONING("Krooning", R.drawable.krooning, R.drawable.map_krooning, R.drawable.map_reference_krooning),
-        FAVORA("Favora", R.drawable.favora, R.drawable.map_favora, R.drawable.map_reference_favora),
-        FIVEPLUS("5+", R.drawable.fiveplus, R.drawable.map_fiveplus, R.drawable.map_reference_fiveplus),
-        OLEREX("Olerex", R.drawable.olerex, R.drawable.map_olerex, R.drawable.map_reference_olerex),
-        EUROOIL("Euro Oil", R.drawable.eurooil, R.drawable.map_eurooil, R.drawable.map_reference_eurooil);
+        STATOIL("Statoil", R.drawable.statoil, R.drawable.map_statoil_gray, R.drawable.map_statoil_green),
+        STATOIL123("Statoil 1-2-3", R.drawable.statoil123, R.drawable.map_statoil_gray, R.drawable.map_statoil_green),
+        ALEXELA("Alexela", R.drawable.alexela, R.drawable.map_alexela_gray, R.drawable.map_alexela_green),
+        NESTE("Neste", R.drawable.neste, R.drawable.map_neste_gray, R.drawable.map_neste_green),
+        KROONING("Krooning", R.drawable.krooning, R.drawable.map_krooning_gray, R.drawable.map_krooning_green),
+        FAVORA("Favora", R.drawable.favora, R.drawable.map_favora_gray, R.drawable.map_favora_green),
+        FIVEPLUS("5+", R.drawable.fiveplus, R.drawable.map_fiveplus_gray, R.drawable.map_fiveplus_green),
+        OLEREX("Olerex", R.drawable.olerex, R.drawable.map_olerex_gray, R.drawable.map_olerex_green),
+        EUROOIL("Euro Oil", R.drawable.eurooil, R.drawable.map_eurooil_gray, R.drawable.map_eurooil_green);
 
         private final int mapReferenceMarker;
         private final String name;
